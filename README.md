@@ -1,3 +1,5 @@
+ 
+
 
 
 # Java
@@ -6,41 +8,869 @@
 
 [leetCode](https://leetcode-cn.com/)
 
-[学习计划表](学习计划表.xlsx)
+[学习路线](Java 学习路线导图.xmind) 
 
-[学习路线](Java 学习路线导图.xmind)
+## 学习重点
 
-## 工具下载
+- [Spring Boot - 自动装配原理](https://www.bilibili.com/video/BV1PE411i7CV?p=6)
 
-### Git
+- [Spring Boot - MVC自动装配原理](https://www.bilibili.com/video/BV1PE411i7CV?p=18)
 
-[git下载](https://git-scm.com/downloads)
+  
 
-#### Git命令
+## 学习思路
 
-> git init	# 初始化本地git仓库（创建新仓库）
->
-> mkdir+文件夹名	# 新建文件夹
->
-> git config --global user.name "xxx"	# 配置用户名
->
-> git config --global user.email "xxx@xxx.com"	\# 配置邮件
+- 搭建环境
+- 导入jar包
+- 编写代码
+- 测试
 
-配置ssh key
+## Java学习笔记
 
-```css
-ssh-keygen -t rsa -C "954144110@qq.com" // 生成key，然后在对应目录找到.pub文件，即公钥，配置到github上
+### JVM
 
-ssh -v git@github.com
-ssh -T git@github.com
-git remote set-url origin git@github.com:q954144110/test.git
+#### JVM大纲
+
+- **类加载器**
+  - 双亲委派机制：由下向上委派，由上向下加载
+    - BootStrapClassLoader
+    - ExtClassLoader
+    - AppClassLoader
+    - CustomClassLoader
+  
+- **Java栈**
+
+- **本地方法栈**
+  - 调用本地方法接口**（JNI）**，JNI最初目的融合C、C++
+  - native修饰，如线程start()方法中的start0()，通过C++实现
+  
+- 程序计数器
+  - **指针**记录当前代码运行位置，**线程私有**
+  
+- **方法区（线程共享）**
+  - 储存：静态变量，常量，运行时常量池，普通方法，类模板（构造方法，接口）
+  
+  - ```java
+    // 常量池
+    Integer integer = 127;
+    Integer integer1 = 127;
+    System.out.println(integer==integer1);// true 常量池范围为-128~127，如果是new出来的，则为false
+    ```
+  
+- **堆（线程共享）**
+  
+  - 储存：变量
+  
+- 执行引擎
+  - 插件加载操作
+  
+- 本地接口
+
+- 本地库
+
+#### 作用
+
+- javap 
+- javap -c a.class > a.txt	反汇编
+
+#### 沙箱安全机制
+
+Java沙箱：将Java代码限定在虚拟机特定的运行范围中，严格限制代码对本地系统资源的访问。
+
+**JVM内存模型**
+
+![img](https://img-blog.csdn.net/2018020914224642)
+
+**JDK体系结构**
+
+![img](https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.zyiz.net%2Fupload%2F202002%2F21%2F202002211223462359.jpg&refer=http%3A%2F%2Fwww.zyiz.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638023109&t=38fd7d0ea1de0ec82cee610c5fd83f48)
+
+
+
+### 线程
+
+- 创建线程
+  - 继承Thread类，重写run()，调用start()开启	// run()运行实体，start()才增加线程
+
+> 线程开启不一定立即执行，由CPU进行调度
+
+### 网络编程
+
+**计算机网络：**计算机网络是指将[地理](https://baike.baidu.com/item/地理)位置不同的具有独立功能的多台[计算机](https://baike.baidu.com/item/计算机/140338)及其外部设备，通过通信线路连接起来，在[网络操作系统](https://baike.baidu.com/item/网络操作系统/3997)，[网络管理软件](https://baike.baidu.com/item/网络管理软件/6579078)及[网络通信协议](https://baike.baidu.com/item/网络通信协议/4438611)的管理和协调下，实现[资源共享](https://baike.baidu.com/item/资源共享/233480)和信息传递的计算机系统。
+
+### Spring
+
+[Spring 5 学习视频](https://www.bilibili.com/video/BV1Vf4y127N5)
+
+[Spring下载](https://repo.spring.io/ui/native/release/org/springframework/spring)
+
+#### Spring 大纲
+
+- **AOP**
+  - 注解
+  - 代理模式
+  - 动态代理（Spring）
+    - JDK动态代理
+    - CGLIB动态代理
+  - 静态代理（AspectJ）
+  - **事务**
+    - **事务的7大传播机制**
+    - **事务的4大隔离级别**（Spring多一个默认级别）
+    - 声明式事务
+    - 编程式事务
+  - **5种通知**
+    - 前置通知（Before）
+    - 后置通知（After）
+    - 返回通知（After-returning ）
+    - 异常通知（After-throwing）
+    - 环绕通知（Around）
+
+- **IOC**
+
+  - **DI**
+
+  - **反射**
+
+  - **Bean**
+
+    - **BeanFactory**
+    - **ApplicationContext**
+    - **单例模式**
+
+    - **工厂模式**
+    - **生命周期**
+    - 作用域
+    - **线程不安全**
+    - 自动装配
+
+#### Spring框架概述
+
+- Spring是轻量级的开源JavaEE框架
+- Spring可以解决企业应用开发的复杂性
+- Spring有两个核心部分：IOC和AOP
+- Spring特点
+  - 方便解耦，简化开发
+  - AOP编程支持
+  - 方便程序测试
+  - 方便和其他框架进行整合
+  - 方便进行事务操作
+  - 降低API开发难度
+
+
+
+#### IOC
+
+> 控制反转，把创建对象过程交给Spring进行管理，降低代码耦合度
+
+- **底层原理**
+
+  1. **xml解析**
+  2. **反射**
+  3. **工厂模式**
+
+- **IOC接口**
+
+  - BeanFactory: IOC容器基本实现，是Spring内部的使用接口，不提供开发人员进行使用。**在加载配置文件时，不会创建对象，在获取或使用对象时才创建对象。**
+  - ApplicationContext：BeanFactory的子接口，提供更多功能，一般由开发人员进行使用。**在加载配置文件时，就会创建配置文件中的对象**
+    - ApplicationContext：BeanFactory实现类
+    - FileSystemXmlApplicationContext
+    - ClassPathXmlApplicationContext
+
+  ![image-20211031152435809](C:\Users\95414\AppData\Roaming\Typora\typora-user-images\image-20211031152435809.png)
+
+- **IOC操作** Bean管理
+
+  - Bean管理：由Spring创建对象，注入属性
+
+  - bean生命周期和作用域
+
+    - 在Spring里面，通过**bean标签内scope属性**设置创建的bean是单实例或多实例。默认单实例
+    - 生命周期
+      1. 通过构造器创建bean实例
+      2. 为bean的属性赋值和对其他bean引用（set方法）
+      3. 把bean实例传递给bean后置处理器的方法（添加后置处理器后才有）
+      4. 调用bean的初始化方法（需要配置**bean标签中init-method属性**）
+      5. 把bean实例传递给bean后置处理器的方法（添加后置处理器后才有）
+      6. bean可以使用（对象已获取）
+      7. 容器关闭时，调用bean的销毁方法（**调用close()销毁**，需要配置**bean标签中destroy-method属性**）
+
+  - xml自动装配
+
+    - 根据指定装配规则，Spring自动匹配属性注入
+    - 通过**bean标签中autowire属性**配置（byType，byName）
+
+  - 操作
+
+    - 基于**注解**操作：注解可以作用于**类、方法、属性**上。目的是简化xml配置
+
+    - 创建对象的四个注解，功能一样，一般用于各自层级
+
+      - @Component
+      - @Service
+      - @Controller
+      - @Repository
+
+    - 注解创建对象
+
+      1. 引入AOP依赖
+
+      2. 开启组件扫描（xml配置context：component-scan）
+      3. 创建类，在类上添加注解
+
+    - 注解方式，属性注入
+
+      1. @AutoWired    根据属性类型注入
+         1. 在类上添加创建对象的注解
+         2. 在属性上添加注解@AutoWired，不需要添加set()
+      2. @Qualifier    根据属性名注入：**和@AutoWired一起使用**，作用添加**唯一标识**
+      3. @Resource    根据类型或属性名注入，javax中的包，更推荐上面两个
+      4. @Value    注入普通类型属性
+
+    - 完全注解开发
+
+      1. 配置类替代配置文件
+
+    - **基于xml方式创建对象：**在配置文件中，使用bean标签，添加对应属性，可以实现对象的创建。
+
+      - bean标签的属性：**id**：对象唯一标识，**class**：创建对象的类全路径（包类路径）。
+      - 在创建对象时，默认执行无惨构造。
+
+    - **基于xml方式注入属性：**DI即**依赖注入**
+
+      - set()注入
+        1. 定义属性和对应的set()
+        2. 在Spring配置文件中配置
+
+      ```xml
+      <bean id="user" class="com.learn.spring.Uesr">
+          <property name="love" value="i"></property>
+      </bean>
+      ```
+
+      - 有参构造注入
+
+        1. 定义属性和对应的有参构造方法
+        2. 在Spring配置文件中配置
+
+        ```xml
+        <bean id="user" class="com.learn.spring.Uesr">
+            <constructor-arg name="needValue" value="v"></constructor-arg>
+        </bean>
+        ```
+
+    - P名称空间注入
+
+    - 字面量
+
+      - 设置null值
+
+      ```xml
+      <property name="love">
+          <null></null>
+      </property>
+      ```
+
+      - 设置特殊符号
+
+      ```xml
+      <!-- <![CDATA[<<1223>>]]> -->
+      <property name="love">
+          <value><![CDATA[<<1223>>]]></value>
+      </property>
+      ```
+
+    - 注入属性
+
+      - 外部bean
+
+        - 创建service类和dao类
+        - 在service类中调用dao类的方法
+        - 在spring配置文件中配置bean对象，ref属性配置注入类的id
+
+        ```xml
+            <bean id="user" class="com.learn.spring.Uesr">
+                <property name="dao" ref="dao"></property>
+            </bean>
+        <bean id="dao" class="com.learn.spring.Dao">
+            <property name="love" value="321"></property>
+            <constructor-arg name="needValue" value="eq"></constructor-arg>
+        </bean>
+        ```
+
+      - 内部bean和级联赋值
+
+      ```xml
+      <!-- 内部bean -->
+      <bean id="user" class="com.learn.spring.Uesr">
+          <property name="dao">
+              <bean id="dao" class="com.learn.spring.Dao">
+                  <property name="love" value="321"></property>
+              </bean>
+          </property>
+          <constructor-arg name="needValue" value="v"></constructor-arg>
+      </bean>
+      ```
+
+      ```xml
+      <!-- 级联赋值 -->
+      <bean id="user" class="com.learn.spring.Uesr">
+          <property name="dao" ref="dao"></property>
+          <property name="dao.like" value="32"></property>
+          <constructor-arg name="needValue" value="v"></constructor-arg>
+      </bean>
+      <bean id="dao" class="com.learn.spring.Dao">
+          <constructor-arg name="needValue" value="eq"></constructor-arg>
+      </bean>
+      ```
+
+
+
+
+
+#### AOP
+
+> 面向切面，不修改源代码，进行功能增强
+
+- 底层使用动态代理
+  - 有接口，使用JDK动态代理。创建接口实现类的代理对象，增强类的方法。
+  - 没有接口，使用CGLIB动态代理。创建子类的代理对象，增强类的方法。
+  
+- 连接点：类中能被增强的方法
+
+- 切入点：实际被增强的方法
+
+- 通知（增强）：实际增强的逻辑部分，主要有5种类型
+
+  - @Before 前置通知：方法之前执行
+  - @AfterReturning 后置通知：方法之后执行
+  - @Around 环绕通知：方法前后都执行
+  - @AfterThrowing 异常通知：方法出现异常时执行
+  - @After 最终通知：无论有无异常，都会执行
+
+- 切面：把通知应用到切入点的过程
+
+- 基于AspectJ实现AOP操作
+
+  - 基于XML配置文件实现
+  - 基于注解方式实现
+
+- 切入点表达式
+
+  - 作用：知道对哪个类里的哪个方法增强
+
+  - 语法：
+
+    ```java
+    execution([权限修饰符][返回类型][类全路径][方法名称]([参数列表]))
+    ```
+
+- 抽取相同的注解：@Pointcut
+
+- 有多个增强类对同一方法增强，可设置优先级
+
+  - 在增强类上加注解@Order(int num)，num越小，优先级越高
+
+#### 事务
+
+事务是数据库操作最基本单元，逻辑上一组操作失败，所有操作都失败。**事务操作一般加在Service层（业务逻辑层）**。
+
+- 事务的四个特性（ACID）
+
+  - 原子性：一个失败，都失败
+  - 一致性：总量一致
+  - 隔离性：多事互不影响
+  - 持久性：事务提交，表数据变化
+
+- 事务管理
+
+  - 编程式
+  - 声明式
+    - 注解方式 @Transactional，加在类上，类中所有方法都开启事务。加在方法上，该方法开启事务。
+    - XML配置
+
+- Spring事务管理API
+
+  - 提供一个接口，代表事务管理器，这个接口针对不同框架提供了不同的实现类
+
+- 事务的传播行为
+
+  - 事务方法：对数据库表中数据变更的操作
+  - 多事务传播行为
+
+- 事务的三个读取问题
+
+  - **脏读**：一个事务读取到了另外一个事务没有提交的数据。
+    - 事务1：更新一条数据
+    - 事务2：读取事务1更新的记录（问题为：因此时事务1可能会回滚）
+    - 事务1：调用commit进行提交
+  - **不可重复读**：在同一事务中，两次读取同一数据，得到内容不同
+    - 事务1：查询一条记录
+    - 事务2：更新事务1查询的记录
+    - 事务2：调用commit进行提交
+    - 事务1：再次查询上次的记录
+  - **幻读**：同一事务中，用同样的操作读取两次，得到的记录数不相同
+    - 事务1：查询表中所有记录
+    - 事务2：插入一条记录
+    - 事务2：调用commit进行提交
+    - 事务1：再次查询表中所有记录
+
+- 事务的隔离级别
+
+  - ISOLATION_READ_UNCOMMITTED 读未提交：允许另外一个事务可以看到这个事务未提交的数据。
+  - ISOLATION_READ_COMMITTED 读已提交：保证一个事务修改的数据提交后才能被另一事务读取，而且能看到该事务对已有记录的更新。
+  - REPEATABLE_READ 可重复读：保证一个事务修改的数据提交后才能被另一事务读取，但是不能看到该事务对已有记录的更新。
+  - SERIALIZABLE 串行化：一个事务在执行的过程中完全看不到其他事务对数据库所做的更新。
+
+  
+
+### Lombok
+
+- IDEA中安装    File ---> Settings --->Plugins ---> Marketplace ---> 搜索lombok进行安装
+- 百度搜索： lombok maven仓库 获取对应maven配置在pom.xml文件中
+
+``` xml
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.16.16</version>
+</dependency>
 ```
 
-## MD语法
 
-[MD语法链接](https://github.com/younghz/Markdown)
+
+### MyBatis
+
+MyBatis是优秀的持久层框架
+
+#### 持久化
+
+数据持久化
+
+- 持久化就是将程序的数据在持久状态（数据库，硬盘）和瞬时状态（内存）的过程
+- 内存：**断电即失**
+- 数据库（JDBC），IO文件持久化
+
+#### **持久层**
+
+Dao层、Service层、Controller层...
+
+- 完成持久化工作的代码块
+- 层界限十分明显
+
+#### 使用目的
+
+- 帮助程序猿将数据存入到数据库中
+- 简化代码（JDBC代码太复杂）
+- 使用的人多
+
+#### 特点
+
+- 简单易学，学习成本低
+- 灵活
+- sql和代码的分离，提高了可维护性。
+- 提供映射标签，支持对象与数据库的orm字段关系映射
+- 提供对象关系映射标签，支持对象关系组建维护
+- 提供xml标签，支持编写动态sql。
+
+
+
+### Spring MVC
+
+#### 工作流程
+
+![image-20220828073401958](C:\Users\95414\Desktop\backup\Java学习\P\Java知识点大纲.md)
+
+### Spring Boot
+
+代码包（controller、dao、pojo、service）需要和Application同级
+
+#### 代码分析
+
+``` java
+// annotation方法返回Class<?>泛型，其中?是Annotation的子类,默认为Annotation类
+Class<? extends Annotation> annotation() default Annotation.class
+```
+
+
+
+#### 自动装配原理
+
+- Application启动类，类上有注解@SpringBootApplication标识
+
+
+
+#### JSR303校验
+
+
+
+#### 多环境配置
+
+
+
+#### MVC配置原理
+
+
+
+
+
+## 实面面试题
+
+### 如是集团 腾讯香港银行
+
+
+
+vo
+
+数据库建表语句
+
+线程池两个方法
+
+线程池的生命周期
+
+#### 入参json出参json用spring mvc这个接口怎么写
+
+@JsonProperty注解
+
+
+
+
+
+
+
+
+
+### 英飞拓智园（自研）
+
+#### Java单元测试
+
+#### Spring Cloud 组件
+
+#### 组合索引，失效情况
+
+#### 执行计划主要看什么内容
+
+#### 策略模式
+
+
+
+
+
+
+
+### 中软华为项目组
+
+#### spring中bean的循环依赖如何实现
+
+![img](https://img-blog.csdn.net/20180717175746503?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3cxbGd5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+
+
+#### String ，数组，set, List相互转换
+
+```java
+// 其中T为要转为的list其中的对象，比如创建的实体类。
+List<T> list=JSONArray.parseArray("",T.class);
+
+Arrays.asList(array)
+    
+    
+1.数组转化为List：
+String[] strArray= new String[]{"Tom", "Bob", "Jane"};
+
+List strList= Arrays.asList(strArray);
+
+2.数组转Set
+String[] strArray= new String[]{"Tom", "Bob", "Jane"};
+
+Set<String> staffsSet = new HashSet<>(Arrays.asList(staffs));
+
+staffsSet.add("Mary"); // ok
+
+staffsSet.remove("Tom"); // ok
+
+3.List转Set
+String[] staffs = new String[]{"Tom", "Bob", "Jane"};
+
+List staffsList = Arrays.asList(staffs);
+
+Set result = new HashSet(staffsList);
+
+4.set转List
+String[] staffs = new String[]{"Tom", "Bob", "Jane"};
+
+Set<String> staffsSet = new HashSet<>(Arrays.asList(staffs));
+
+List<String> result = new ArrayList<>(staffsSet);
+```
+
+
+
+#### mysql--->innodb引擎什么时候表锁什么时候行锁？
+
+- 只有通过索引条件检索数据，InnoDB才会使用行级锁，否则，InnoDB将使用表锁
+  - (明确指定主键，并且有此笔资料，row lock)
+    SELECT * FROM products WHERE id='3' FOR UPDATE;
+    SELECT * FROM products WHERE id='3' and type=1 FOR UPDATE;
+  - (明确指定主键，若查无此笔资料，无lock)
+    SELECT * FROM products WHERE id='-1' FOR UPDATE;
+  - (无主键，table lock)
+    SELECT * FROM products WHERE name='Mouse' FOR UPDATE;
+  - (主键不明确，table lock)
+    SELECT * FROM products WHERE id<>'3' FOR UPDATE;
+  - (主键不明确，table lock)
+    SELECT * FROM products WHERE id LIKE '3' FOR UPDATE;
+
+
+
+### 赞同科技（外包）银行项目
+
+#### MySQL的优化
+
+- SQL和索引优化
+  - 正确的使用索引
+  - 查询具体的字段而非全部字段
+  - 优化子查询
+  - 注意查询结果集
+  - 不要在列上进行运算操作
+  - 适当增加冗余字段
+- 数据库结构优化
+  - 使用最小数据长度
+  - 使用最简单数据类型
+  - 尽量少定义text类型
+  - 适当分表、分库策略
+
+- 硬件优化
+  - 磁盘
+  - 内存
+  - 网络
+
+#### MySQL如何确认查询命中
+
+- 通过explain分析
+
+#### MySQL内连接和外连接
+
+- inner join on 内连接 ，返回交集
+
+``` sql
+select * from a_table a inner join b_table b on a.a_id = b.b_id;
+```
+
+- left join on / left outer join on 左连接/左外连接，返回左表全记录及右表符合条件记录，不足则为Null
+
+``` sql
+select * from a_table a left join b_table b on a.a_id = b.b_id;
+```
+
+- right join on / right outer join on 右连接/右外连接，返回右表全记录及左表符合条件记录，不足则为Null
+
+#### MySQL的索引如何建立
+
+- PRIMARY KEY 主键索引
+- UNIQUE 唯一索引
+- INDEX 普通索引
+- FULLTEXT 全文索引
+
+``` sql
+ALTER TABLE 'TABLE_NAME' ADD PRIMARY KEY ('column_name')
+ALTER TABLE 'TABLE_NAME' ADD UNIQUE  ('column_name')
+ALTER TABLE 'TABLE_NAME' ADD INDEX  ('column_name')
+ALTER TABLE 'TABLE_NAME' ADD FULLTEXT  ('column_name')
+
+CREATE TABLE mytable (
+　id serial primary key,
+　category_id int not null default 0,
+　user_id int not null default 0,
+　adddate int not null default 0
+);
+```
+
+
+
+#### WHERE和HAVING的区别
+
+- Where 是一个约束声明，使用Where约束来自数据库的数据，Where是在结果返回之前起作用的，Where中不能使用聚合函数。
+- Having是一个过滤声明，是在查询返回结果集以后对查询结果进行的过滤操作，在Having中可以使用聚合函数。
+- **sql语句的执行过程是：from-->where-->group by -->having --> select--- >order by**
+
+
+
+#### char和varchar区别
+
+-  char 定长，查询快，存储长度不足时填充空格，最多放255字符。
+- varchar 变长，查询相对慢，按实际长度储存，最多放65532字符（64KB）。
+
+#### MyBatis和Hibernate的区别
+
+- **Mybatis优势**
+  - MyBatis可以进行更为细致的SQL优化，可以减少查询字段。
+  -  MyBatis容易掌握，而Hibernate门槛较高。
+-   **Hibernate优势**
+  - Hibernate的DAO层开发比MyBatis简单，Mybatis需要维护SQL和结果映射。
+  -  Hibernate对对象的维护和缓存要比MyBatis好，对增删改查的对象的维护要方便。
+  -  Hibernate数据库移植性很好，MyBatis的数据库移植性不好，不同的数据库需要写不同SQL。
+  -  Hibernate有更好的二级缓存机制，可以使用第三方缓存。MyBatis本身提供的缓存机制不佳。
+
+#### MyBatis的优缺点
+
+- 优点
+  - 简单易学
+  - 灵活
+  - 接触sql与代码的耦合
+  - 提供映射标签，支持对象与数据库的orm字段关系映射
+  - 提供对象关系映射标签，支持对象关系组建维护
+  - 提供xml标签，支持编写动态sql
+- 缺点
+  - 编写SQL语句时工作量很大，尤其是字段多、关联表多时
+  - SQL语句依赖于数据库，导致数据库移植性差，不能更换数据库
+  - 二级缓存机制不佳
+  - 框架还是比较简陋
+
+#### session和cookie的区别
+
+- **储存位置：**cookie数据存放在客户的浏览器上，session数据放在服务器上
+
+- **安全性：**cookie不是很安全，储存在客户端，有cookie欺骗的风险session则储存在服务器端，相对安全
+
+- 设置cookie时间可以使cookie过期。但是使用session-destory（），我们将会销毁会话。
+
+- **储存带来的压力：**session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能考虑到减轻服务器性能方面，应当使用cookie。
+
+- **储存大小**：单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。(Session对象没有对存储的数据量的限制，其中可以保存更为复杂的数据类型)
+
+- **存储类型**：cookie只能存储string对象，session则支持java对象
+
+   
+
+#### MyBatis缓存
+
+- 一级缓存
+- 二级缓存
+
+#### MyBatis如何防止SQL注入
+
+- 尽量用#{}不用${}，因为#{}会进行预编译
+- 若必须使用${}需要做字符校验
+
+#### MyBatis如何分页
+
+- 数组分页
+- sql分页
+- 拦截器分页
+- RowBounds分页
+
+
+
+#### JVM内存溢出如何解决
+
+- **引起内存溢出的原因**
+  - 内存中加载的数据量过于庞大，如一次从数据库取出过多数据
+  - 集合类中有对对象的引用，使用完后未清空，使得JVM不能回收
+  - 代码中存在死循环或循环产生过多重复的对象实体
+  - 启动参数内存值设定的过小
+  - 使用的第三方软件中的BUG
+- **解决方案**
+  - 修改JVM启动参数，直接增加内存（-Xms5M  -Xmx5M  -Xss104k  -XX:PermSize  XX:MaxPermSize）
+  - 检查错误日志，查看“OutOfMemory”错误前是否有其它异常或错误
+  - 对代码进行走查和分析，找出可能发生内存溢出的位置
+    - 检查对数据库查询中，是否有一次获得全部数据的查询
+    - 检查代码中是否有死循环或递归调用
+    - 检查是否有大循环重复产生新对象实体
+    - 检查List、MAP等集合对象是否有使用完后，未清除的问题
+  - 使用内存查看工具动态查看内存使用情况
+
+#### SpringBoot主要配置文件
+
+- 支持自动装配配置文件
+  - pom.xml 依赖导入
+  - 底层配置文件
+- 多环境配置文件
+  - application.yml
+
+#### SpringBoot 和 SpringCloud区别
+
+- springboot是一个快速开发框架,专注于快速方便的开发单个个体的微服务。 **核心原理:是基于SpringMVC无配置文件完全注解化+内置tomcat实现SpringBoot框架,使用Main函数启动**
+- SpringCloud是关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来，为各个微服务之间提供，配置管理、服务发现、断路器、路由、等集成服务
+- SpringBoot不依赖于SpringCloud,SpringCloud依赖于SpringBoot,属于依赖关系
+
+#### Nginx
+
+- Nginx是一个 轻量级/高性能的反向代理Web服务器，他实现非常高效的反向代理、负载平衡
+- 反向代理，负载均衡
+
+#### 分布锁
+
+- 基于数据库实现分布式锁
+- 基于缓存（Redis等）实现分布式锁
+- 基于Zookeeper实现分布式锁
+
+#### 产生死锁原因及如何解决死锁
+
+**产生死锁的必要条件**
+
+- **互斥使用**：即当资源被一个线程使用(占有)时，别的线程不能使用
+- **不可抢占**：资源请求者不能强制从资源占有者手中夺取资源，资源只能由资源占有者主动释放。
+- **请求和保持**：即当资源请求者在请求其他的资源的同时保持对原有资源的占有。
+- **循环等待**：即存在一个等待队列：P1占有P2的资源，P2占有P3的资源，P3占有P1的资源。这样就形成了一个等待环路。
+
+**产生的原因**
+
+- **竞争资源引起进程死锁**
+- **可剥夺资源和不可剥夺资源**
+- **竞争不可剥夺资源**
+- **竞争临时资源**
+
+**解决方案**
+
+- **死锁预防**
+  - **有序资源分配法**
+  - **银行家算法**
+- **死锁避免**
+- **死锁检测和解除**
+
+#### Redis缓存机制     
+
+- Redis内部是一个**key-value存储系统**。它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、sset(sorted set –有序集合)和hash（哈希类型，类似于Java中的map）。**Redis基于内存运行并支持持久化的NoSQL数据库，也被人们称为数据结构服务器。**
+
+#### Redis缓存穿透/雪崩
+
+- **缓存穿透**：key对应的数据在数据源并不存在，每次针对此key的请求从缓存获取不到，请求都会到数据源，从而可能压垮数据源。比如用一个不存在的用户id获取用户信息，不论缓存还是数据库都没有，若黑客利用此漏洞进行攻击可能压垮数据库。
+- **缓存击穿**：key对应的数据存在，但在redis中过期，此时若有大量并发请求过来，这些请求发现缓存过期一般都会从后端DB加载数据并回设到缓存，这个时候大并发的请求可能会瞬间把后端DB压垮。
+
+- **缓存雪崩**：海量请求访问服务器,服务器的性能由缓存支撑,一旦一定范围的缓存数据未命中,请求的数据访问涌入数据库;承受不了压力造成宕机--重启--海量请求并未消失--宕机--重启,系统长时间不可用;这种情况就是缓存的雪崩。
+
+**缓存穿透解决方案**
+
+- **有很多种方法可以有效地解决缓存穿透问题**，**最常见**的则是采用布隆过滤器，将所有可能存在的数据哈希到一个足够大的bitmap中，一个一定不存在的数据会被 这个bitmap拦截掉，从而避免了对底层存储系统的查询压力。**另外也有一个**更为简单粗暴的方法（我们采用的就是这种），如果一个查询返回的数据为空（不管是数据不存在，还是系统故障），我们仍然把这个空结果进行缓存，但它的过期时间会很短，最长不超过五分钟。
+
+**缓存击穿解决方案**
+
+- **使用互斥锁(mutex key)**：业界比较常用的做法，是使用mutex。简单地来说，就是在缓存失效的时候（判断拿出来的值为空），不是立即去load db，而是先使用缓存工具的某些带成功操作返回值的操作（比如Redis的SETNX或者Memcache的ADD）去set一个mutex key，当操作返回成功时，再进行load db的操作并回设缓存；否则，就重试整个get缓存的方法。
+
+**缓存雪崩解决方案**
+
+- 缓存失效时的雪崩效应对底层系统的冲击非常可怕！大多数系统设计者考虑用加锁或者队列的方式保证来保证不会有大量的线程对数据库一次性进行读写，从而避免失效时大量的并发请求落到底层存储系统上。还有一个简单方案就时讲缓存失效时间分散开，比如我们可以在原有的失效时间基础上增加一个随机值，比如1-5分钟随机，这样每一个缓存的过期时间的重复率就会降低，就很难引发集体失效的事件。
+
+#### SpringMVC和struts2区别
+
+- 1、springmvc入口是一个servlet前端控制器( DispatcherServlet ),struts2入口是一个filter过滤器(StrutsPrepareAndExecuteFilter)
+- struts2通过在action类中定义成员变量接收参数,(属性驱动和模型驱动),它只能使用多例模式管理action.springmvc通过在coontroller方法中定义形参接收参数,springmvc可以使用单例模式管理controller
+- springmvc是基于方法开发的，注解开发中使用requestMapping将url和方法进行 映射,如果根据url找到controller类的方法生成一个handler处理器对象(只包括一个method).struts2是基于类开发的，每个请求过来创建一个action实例,实例对象中有若干个方法.开发中建议使用springmvc,springmvc方法更类似service业务方法
+- struts2采用值栈存储请求和相应的数据，通过OGNL存取数据；springmvc通过参数绑定期将request请求内容解析,并给方法形参赋值.
+- struts2和springmvc的速度是相当的,由于struts2的漏洞较多,跟多企业使用springmvc
+- SpringMVC验证支持JSR303，处理起来相对更加灵活方便，而Struts2验证比较繁琐，感觉太烦乱。
+- 设计思想上，Struts2更加符合OOP的编程思想， SpringMVC就比较谨慎，在servlet上扩展。
+- 拦截器实现机制上，Struts2有以自己的interceptor机制，SpringMVC用的是独立的AOP方式，这样导致Struts2的配置文件量还是比SpringMVC大。
+
+#### HashMap为什么是线程不安全的？
+
+#### ==和equals的区别
+
+
 
 ## 面试题
+
+
 
 ### 面向对象
 
@@ -57,19 +887,16 @@ git remote set-url origin git@github.com:q954144110/test.git
 > 面向对象：A + B
 
 - 封装
-
   - 属性私有化，提供外部访问方法，外部调用无需关注内部实现
   - 经典案例
     - javabean的属性私有，提供get/set方法对外访问
     - orm框架
 
 - 继承
-
   - 共性抽取，特性独立
   - 子类共性的方法或属性直接使用父类的，不需要再自己定义，只需扩展自己的特性
 
 - 多态
-
   - 继承
   - 方法
   - 父类引用指向子类对象    
@@ -78,7 +905,6 @@ git remote set-url origin git@github.com:q954144110/test.git
   父类类型 变量名 = new 子类对象;
   变量名.方法名();
   ```
-
   - 无法调用子类特有方法
 
 ### String、StringBuffer、StringBulider
@@ -204,6 +1030,11 @@ git remote set-url origin git@github.com:q954144110/test.git
 
 ### 双亲委派
 
+- BootStrapClassLoader
+- ExtClassLoader
+- AppClassLoader
+- CustomClassLoader
+
 ![img](https://upload-images.jianshu.io/upload_images/7634245-7b7882e1f4ea5d7d.png)
 
 
@@ -225,13 +1056,13 @@ git remote set-url origin git@github.com:q954144110/test.git
 ### 线程的生命周期
 
 -  创建：创建了一个新的线程
--  就绪：调用了start()后，进入可运行线程池中，等待获取CUP资源
--  运行：就绪线程获取了CUP资源，执行代码
--  阻塞：暂停运行
-   - 等待阻塞：运行的线程执行中wait()，释放所有资源，进入等待池。必须其他线程调用notify()或者notifyAll方法才能被唤醒。wait()是object中的方法，同步控制方法或控制块中使用，会释放锁，不需要捕获异常
-   - 同步阻塞：运行时的线程在获取对象的同步锁时，该锁被占用，则进入锁池等待
-   - 其他阻塞：运行时的线程执行了sleep()、join()，或发出I/O请求，线程会进入阻塞状态。当sleep()超时、join()等待线程终止或超时、I/O处理完毕时，线程重回就绪状态。sleep()是Thread中的静态方法，只对当前对象有效，不会释放锁，需要捕获异常
--  死亡：线程执行完毕，或出现异常退出线程
+- 就绪：调用了start()后，进入可运行线程池中，等待获取CUP资源
+- 运行：就绪线程获取了CUP资源，执行代码
+- 阻塞：暂停运行
+  - 等待阻塞：运行的线程执行中wait()，释放所有资源，进入等待池。必须其他线程调用notify()或者notifyAll方法才能被唤醒。wait()是object中的方法，同步控制方法或控制块中使用，会释放锁，不需要捕获异常
+  - 同步阻塞：运行时的线程在获取对象的同步锁时，该锁被占用，则进入锁池等待
+  - 其他阻塞：运行时的线程执行了sleep()、join()，或发出I/O请求，线程会进入阻塞状态。当sleep()超时、join()等待线程终止或超时、I/O处理完毕时，线程重回就绪状态。sleep()是Thread中的静态方法，只对当前对象有效，不会释放锁，需要捕获异常
+- 死亡：线程执行完毕，或出现异常退出线程
 
 ### sleep()、wait()、join()、yield()
 
@@ -255,7 +1086,6 @@ git remote set-url origin git@github.com:q954144110/test.git
   > 在Java中，堆是JVM所管理的内存中最大的一块，是所有线程共享的一块内存区域，在JVM启动时创建。堆所存在的内存区域的唯一目的就是存放对象实例，几乎所有的对象实例以及数组都在这里分配内存
 
 - 栈是每个线程独有的，保存其运行状态和局部自动变量。操作系统在切换线程时会自动切换对应的栈。
-
 - 进程相互独立由操作系统保证，进程中的所有线程都能访问此进程的堆空间，这就可能造成线程不安全。
 
 ### Thread和Runnable
@@ -447,7 +1277,34 @@ git remote set-url origin git@github.com:q954144110/test.git
 
 ### spring bean的生命周期
 
+bean生命周期和作用域
+
+- 在Spring里面，通过**bean标签内scope属性**设置创建的bean是单实例或多实例。默认单实例
+- 生命周期
+  1. 通过构造器创建bean实例
+  2. 为bean的属性赋值和对其他bean引用（set方法）
+  3. 把bean实例传递给bean后置处理器的方法（添加后置处理器后才有）
+  4. 调用bean的初始化方法（需要配置**bean标签中init-method属性**）
+  5. 把bean实例传递给bean后置处理器的方法（添加后置处理器后才有）
+  6. bean可以使用（对象已获取）
+  7. 容器关闭时，调用bean的销毁方法（**调用close()销毁**，需要配置**bean标签中destroy-method属性**）
+
 ### spring bean 的作用域
+
++ singleton：*单例模式*
+  + IOC容器仅创建一个Bean实例，后续每次从IOC容器中获取的都是同一个Bean实例。Spring中的Bean默认都是单例模式的。
+
++ prototype：原型模式（又叫做多例模式）
+  + 每次从IOC容器中获取的都是一个新的Bean实例。
+
++ request：HTTP请求
+  + 每一次HTTP请求都会产生一个新的Bean实例，该Bean实例仅在当前HTTP请求中共享。
+
++ session：HTTP会话
+  + 每一次HTTP会话都会产生一个新的Bean实例，该Bean实例仅在当前HTTP会话中共享。
+
++ global-session：全局HTTP会话
+  + 所有的Session共享一个Bean实例。仅在基于portlet的web应用中才有意义，Spring5已经没有了。
 
 ### spring 单例bean的线程
 
@@ -486,12 +1343,12 @@ git remote set-url origin git@github.com:q954144110/test.git
 
 - **数据库引擎不支持事务**：MySQL 其 MyISAM 引擎是不支持事务操作的，InnoDB 才是支持事务的引擎。从 MySQL 5.5.5 开始的默认存储引擎是：InnoDB，之前默认的都是：MyISAM
 - **没有被 Spring 管理** 
-- **方法不是 public 的：**`@Transactional` 只能用于 public 的方法上，否则事务不会失效，如果要用在非 public 方法上，可以开启 `AspectJ` 代理模式。
+-  **方法不是 public 的：**`@Transactional` 只能用于 public 的方法上，否则事务不会失效，如果要用在非 public 方法上，可以开启 `AspectJ` 代理模式。
 - **自身调用**：使用this自身调用则不会经过spring代理类，因此不会获取bean对象，AOP不生效，事务失效。
-- **异常被吃了**：异常try - catch ，事务发生异常且异常被捕获，因此不会回滚，事务失效。
+-  **异常被吃了**：异常try - catch ，事务发生异常且异常被捕获，因此不会回滚，事务失效。
 - **异常类型错误**：默认回滚的异常是：RuntimeException，如果你想触发其他异常的回滚，需要在注解上配置一下**@Transactional(rollbackFor = Exception.class)**
-- **数据源没有配置事务管理器**
-- **不支持事务**
+-  **数据源没有配置事务管理器**
+-  **不支持事务**
 
 ### bean的自动装配
 
@@ -528,7 +1385,7 @@ git remote set-url origin git@github.com:q954144110/test.git
 8. DispatcherServlet将ModelAndView传给ViewReslover视图解析器。
 9. ViewReslover解析后返回具体View。
 10. DispatcherServlet根据View进行渲染视图（即将模型数据填充至视图中）。
-11. DispatcherServlet响应用户。
+11.  DispatcherServlet响应用户。
 
 ![img](https://images2015.cnblogs.com/blog/249993/201612/249993-20161212142542042-2117679195.jpg)
 
@@ -593,7 +1450,7 @@ git remote set-url origin git@github.com:q954144110/test.git
   2. **Hibernate数据库移植性远大于MyBatis**。Hibernate通过它强大的映射结构和hql语言，大大降低了对象与数据库（Oracle、MySQL等）的耦合性，而MyBatis由于需要手写sql，因此与数据库的耦合性直接取决于程序员写sql的方法，如果sql不具通用性而用了很多某数据库特性的sql语句的话，移植性也会随之降低很多，成本很高。
   3. **Hibernate拥有完整的日志系统，MyBatis则欠缺一些**。Hibernate日志系统非常健全，涉及广泛，包括：sql记录、关系异常、优化警告、缓存提示、脏数据警告等；而MyBatis则除了基本记录功能外，功能薄弱很多。
   4. **MyBatis相比Hibernate需要关心很多细节**。**Hibernate配置要比MyBatis复杂的多，学习成本也比MyBatis高**。但也正因为MyBatis使用简单，才导致它要比Hibernate关心很多技术细节。MyBatis由于不用考虑很多细节，开发模式上与传统JDBC区别很小，因此很容易上手并开发项目，但忽略细节会导致项目前期bug较多，因而开发出相对稳定的软件很慢，而开发出软件却很快。Hibernate则正好与之相反。但是如果使用Hibernate很熟练的话，实际上开发效率丝毫不差于甚至超越MyBatis。
-  5. **sql直接优化上，MyBatis要比Hibernate方便很多**。由于MyBatis的sql都是写在xml里，因此优化sql比Hibernate方便很多。而Hibernate的sql很多都是自动生成的，无法直接维护sql；虽有hql，但功能还是不及sql强大，见到报表等变态需求时，hql也歇菜，也就是说hql是有局限的；Hibernate虽然也支持原生sql，但开发模式上却与orm不同，需要转换思维，因此使用上不是非常方便。总之写sql的灵活度上Hibernate不及MyBatis。
+  5. **sql直接优化上，MyBatis要比Hibernate方便很多**。由于MyBatis的sql都是写在xml里，因此优化sql比Hibernate方便很多。而Hibernate的sql很多都是自动生成的，无法直接维护sql；虽有hql，但功能还是不及sql强大，见到报表等变态需求时，hql也歇菜，也就是说hql是有局限的；Hibernate虽然也支持原生sql，但开发模式上却与orm不同，需要转换思维，因此使用上不是非常方便。总之写sql的灵活度上Hibernate不及MyBatis。 
   6. **缓存机制上，Hibernate要比MyBatis更好一些**。MyBatis的二级缓存配置都是在每个具体的表-对象映射中进行详细配置，这样针对不同的表可以自定义不同的缓存机制。并且Mybatis可以在命名空间中共享相同的缓存配置和实例，通过Cache-ref来实现。而Hibernate对查询对象有着良好的管理机制，用户无需关心SQL。所以在使用二级缓存时如果出现脏数据，系统会报出错误并提示。
 
 ### #{}与${}的区别
@@ -601,4 +1458,215 @@ git remote set-url origin git@github.com:q954144110/test.git
 - \#{}是预编译处理、占位符，${}是字符串替换、拼接符。
 - Mybatis 在处理#{}时，会将 sql 中的#{}替换为?号，调用 PreparedStatement 的 set 方法来赋值。
 - 因此使用#{}可以有效的防止 SQL 注入，提高系统安全性。
+
+
+
+
+
+
+
+## Java方法
+
+- **Arrays.toString(a)**	一维数组a转String
+- **Arrays.deepToString(b)**	二维数组a转String
+
+
+
+
+
+
+
+## 扩展
+
+### 打开GitHub慢，解决方案
+
+[DNS查询网站](http://tool.chinaz.com/dns)，我们输入 github.com 查询其IP，选择TTL值小的
+
+进入路径 c:\Windows\System32\drivers\etc\  打开 hosts 文件，配置IP地址映射，可去除DNS解析域名的时间。配置完后，重启网络/刷新DNS解析缓存
+
+```
+#解决git clone 速度慢的问题
+52.192.72.89 github.com
+52.192.72.89 www.github.com
+151.101.77.194 github.global.ssl.fastly.net
+#解决浏览器下载master-zip包的问题
+192.30.253.120 codeload.github.com
+#解决github不能查看图片的问题
+199.232.68.133 raw.githubusercontent.com
+
+#进入cmd，刷新DNS解析缓存
+ipconfig /flushdns
+```
+
+### SQL知识
+
+- 可使用**explain**看一下具体的查询情况
+
+``` sql
+// explain放在查询语句前
+explain select * from table_name;
+```
+
+
+
+## 工具
+
+### Git
+
+[git下载](https://git-scm.com/downloads)
+
+#### Git命令
+
+> git init	# 初始化本地git仓库（创建新仓库）
+>
+> mkdir+文件夹名	# 新建文件夹
+>
+> git config --global user.name "xxx"	# 配置用户名
+>
+> git config --global user.email "xxx@xxx.com"	\# 配置邮件
+
+配置ssh key
+
+```
+git init	// 初始化地址
+git config --global user.name "q954144110" // 配置用户名，应与GitHub相同
+git config --global user.email "954144110@qq.com" // 配置邮箱，因与GitHub相同
+git config --global --list	// 查看配置
+git remote add origin "https://github.com/q954144110/test.git"	// 添加仓库路径
+git remote set-url origin git@github.com:q954144110/test.git	// 设置仓库路径
+ssh-keygen -t rsa -C "954144110@qq.com" // 生成私钥和公钥，公钥配置在GitHub上
+ssh -T git@github.com	// 测试是否成功连接GitHub
+```
+
+下拉代码
+
+```
+git clone https://github.com/OYSLccctop/FundingOnline.git
+```
+
+上传代码
+
+```
+git remote set-url origin git@github.com:q954144110/test.git	// 修改连接仓库地址
+git add . // 将工作区代码添加到待提交区 ，git add . 是将所有提交
+git commit -m "commit test"  // git commit -m "上传代码的注释",是将代码从待提交区提交到本地
+git pull origin master // 是从远程服务器拉取代码到本地仓库
+git push origin master // 是从本地仓库推送代码到远程服务器
+```
+
+
+
+```
+问题：
+ssh-keygen -t rsa -C "954144110@qq.com" // 自定义目录/d/master/publicKey/id_rsa，生成key，然后在对应目录找到.pub文件，即公钥，配置到github上
+
+
+ssh -v git@github.com
+
+ssh -T git@github.com
+// Hi q954144110! You've successfully authenticated, but GitHub does not provide shell access.
+
+git remote set-url origin git@github.com:q954144110/test.git 
+// fatal: not a git repository (or any of the parent directories): .git
+
+git init
+git remote set-url origin git@github.com:q954144110/test.git 
+// error: No such remote 'origin'
+// git remote set-url是修改远程的url的命令,前提是要先有远程url
+
+git remote add origin "https://github.com/q954144110/test.git"
+// git remote set-url问题解决
+
+```
+
+### IDEA
+
+#### 快捷输入法
+
+- context.getBean("user", Uesr.class)**.var**	--> Uesr user = context.getBean("user", Uesr.class);
+- A.for    A的for循环
+
+#### 快捷键
+
+- **Alt+7**/**Ctrl+F12**	查看类中所有方法
+- **Ctrl + H**    查看类结构
+- **Alt+Insert**    快捷生成常用方法（构造，set，get...）
+
+## MD语法
+
+[MD语法链接](https://github.com/younghz/Markdown)
+
+- ``` + 语言类型    生成对应代码块
+  ``` + 语言类型    生成对应代码块
+  ```
+
+- Shift + Tab    代码块格式化
+
+- \+ \- \* 三个都是无序列表
+
+## 网页快捷键
+
+- F    全屏
+- D    弹幕
+- E    保存
+- W    投币
+- Q    点赞
+
+## 资源获取
+
+- UI页面    百度搜索：  bootstrap模板
+
+spring bean 的作用域
+
+spring 事务的隔离级别
+
+mysql 查重复字段
+
+spring mvc 的流程
+
+
+
+# 项目开发问题
+
+## 一、Maven配置问题
+
+### 报错如下
+
+``` 
+Could not transfer artifact org.apache.maven:maven-settings-builder:jar:3.0 from/to central (https://repo.maven.apache.org/maven2): Transfer failed for https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings-builder/3.0/maven-settings-builder-3.0.jar
+```
+
+### 解决方案一
+
+``` 
+修改idea的setting中maven配置
+```
+
+## 二、无法访问http://localhost:8080/
+
+```
+无法访问此网站localhost 拒绝了我们的连接请求。
+```
+
+### 解决方案一
+
+```
+我启动的不是Application，启动的是Test用例，spingboot整个项目启动，都是从Application启动的
+```
+
+## 三、使用IDEA从GitHub上面下载项目
+
+[使用IDEA](https://blog.csdn.net/qq_43783527/article/details/115052015)
+
+[下载到本地](https://blog.csdn.net/weixin_57023347/article/details/119935146)
+
+### 四、IDEA打开Git项目后没有Git选项
+
+[Git菜单栏显出](https://blog.csdn.net/qq_43783527/article/details/115052015)
+
+### 五、IDEA项目如何上传至GitHub
+
+[上传项目](https://blog.csdn.net/qq_37954460/article/details/120628439)
+
+
 
